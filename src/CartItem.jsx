@@ -9,27 +9,44 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
- 
+    const totalAmount = cart.reduce((item, total) => (
+        total + (item.quantity * parseFloat(item.cost.substring(1))), 0)
+    );
   };
 
+  // Return to plant listing page
   const handleContinueShopping = (e) => {
-   
+    onContinueShopping(e);
   };
 
+  // Send cart to the checkout section (Function not yet implemented)
+  const handleCheckoutShopping = (e) => {
+    alert('Function for checkout will be added for future reference.');
+  }
 
-
+  // Increment quantity of item already in cart
   const handleIncrement = (item) => {
+    const quantityIncremented = item.quantity++;
+    dispatch(updateQuantity({name: item.name, quantity: quantityIncremented}));
   };
 
+  // Decrement quantity of item already in cart
   const handleDecrement = (item) => {
-   
+    const quantityDecremented = item.quantity--;
+    if (quantityDecremented > 1) {
+      dispatch(updateQuantity({name: item.name, quantity: quantityDecremented}));
+    } else {
+      dispatch(removeItem(item));  
+    }
   };
 
   const handleRemove = (item) => {
+    dispatch(removeItem(item));
   };
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+    const itemTotalCost = parseFloat(item.cost.substring(1)) * item.quantity;
   };
 
   return (
