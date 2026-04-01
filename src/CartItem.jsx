@@ -1,17 +1,19 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
+import CartSlice, { removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
 
 const CartItem = ({ onContinueShopping }) => {
-  const cart = useSelector(state => state.cart.items);
-  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart.items);  // Retrieve cart state from Redux store
+  const dispatch = useDispatch();  // Alias for 'useDispatch' hook
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
-    const totalAmount = cart.reduce((item, total) => (
-        total + (item.quantity * parseFloat(item.cost.substring(1))), 0)
-    );
+    let total = 0;
+    cart.forEach(item => (
+        total += parseFloat(item.cost.substring(1)) * item.quantity
+    ));
+    return total;
   };
 
   // Return to plant listing page
@@ -40,6 +42,7 @@ const CartItem = ({ onContinueShopping }) => {
     }
   };
 
+  // Remove item and its quantity entire from cart
   const handleRemove = (item) => {
     dispatch(removeItem(item));
   };
@@ -73,7 +76,7 @@ const CartItem = ({ onContinueShopping }) => {
       <div style={{ marginTop: '20px', color: 'black' }} className='total_cart_amount'></div>
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
-        <br />
+          <br />
         <button className="get-started-button1">Checkout</button>
       </div>
     </div>

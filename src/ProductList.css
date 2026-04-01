@@ -52,11 +52,21 @@ body {
     flex-wrap: wrap;
     gap: 50px;
     /* background-color: pink; */
-    /* justify-content: space-between; */
+    justify-content: space-between;
     padding: 20px;
     width: 100%;
     align-items: center;
     justify-content: center;
+}
+
+.product-list-heading {
+    font-size: 1.5rem;
+    margin: auto;
+    font-weight: bold;
+    border-top: 3px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.15);
+    padding: 5px;
+    width: fit-content;
 }
 
 /* Product Card */
@@ -70,7 +80,6 @@ body {
     border-radius: 5px;
     text-align: center;
     position: relative;
-    
     gap: 20px;
 }
 
@@ -156,7 +165,7 @@ body {
 .luxury {
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     width: 650px;
     font-size: 19px;
 }
