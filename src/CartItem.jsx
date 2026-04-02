@@ -6,7 +6,6 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);  // Retrieve cart state from Redux store
   const dispatch = useDispatch();  // Alias for 'useDispatch' hook
-  let numberOfItems = cart.length;
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
@@ -30,14 +29,12 @@ const CartItem = ({ onContinueShopping }) => {
   // Increment quantity of item already in cart
   const handleIncrement = (item) => {
     const quantityIncremented = item.quantity + 1;
-    numberOfItems += 1;
     dispatch(updateQuantity({name: item.name, quantity: quantityIncremented}));
   };
 
   // Decrement quantity of item already in cart
   const handleDecrement = (item) => {
     const quantity = item.quantity;
-    numberOfItems -= 1;
     if (quantity >= 2) {
       dispatch(updateQuantity({name: item.name, quantity: quantity - 1}));
     } else {
@@ -47,7 +44,6 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Remove item and its quantity entire from cart
   const handleRemove = (item) => {
-    numberOfItems -= item.quantity;
     dispatch(removeItem(item.name));
   };
 
